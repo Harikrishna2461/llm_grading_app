@@ -1,0 +1,71 @@
+
+
+networks:
+  essay-net:
+    driver: bridge
+
+services:
+  grading-agent:
+    build: ./grading-agent
+    env_file: .env
+    environment:
+      - PORT=8001
+    ports:
+      - "8001:8001"
+    networks:
+      - essay-net
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8001/health"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
+
+  review-agent:
+    build: ./review-agent
+    env_file: .env
+    environment:
+      - PORT=8002
+    ports:
+      - "8002:8002"
+    networks:
+      - essay-net
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8002/health"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
+
+  platform-backend:
+    build: ./platform-backend
+    env_file: .env
+    environment:
+      - PORT=8000
+      - GRADING_AGENT_URL=http://grading-agent:8001
+      - REVIEW_AGENT_URL=http://review-agent:8002
+    ports:
+      - "8000:8000"
+    networks:
+      - essay-net
+    depends_on:
+      grading-agent:
+        condition: service_healthy
+      review-agent:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
+
+  frontend:
+    build: ./frontend
+    ports:
+      - "80:80"
+    networks:
+      - essay-net
+    depends_on:
+      platform-backend:
+        condition: service_healthy

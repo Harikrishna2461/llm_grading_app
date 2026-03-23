@@ -1,0 +1,317 @@
+/* ── Layout ─────────────────────────────────────── */
+.app {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 2rem 1.5rem;
+}
+
+.app-header {
+  text-align: center;
+  margin-bottom: 2.5rem;
+}
+
+.app-title {
+  font-size: 2rem;
+  font-weight: 700;
+  background: linear-gradient(135deg, var(--accent-grade), var(--accent-review));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: 0.5rem;
+}
+
+.app-subtitle {
+  color: var(--text-muted);
+  font-size: 1rem;
+}
+
+.app-main {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+/* ── Essay Form ─────────────────────────────────── */
+.essay-form {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.essay-label {
+  font-weight: 600;
+  color: var(--text);
+  font-size: 1rem;
+}
+
+.essay-textarea {
+  width: 100%;
+  padding: 1rem;
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  color: var(--text);
+  font-family: inherit;
+  font-size: 0.95rem;
+  resize: vertical;
+  transition: border-color 0.2s;
+  line-height: 1.7;
+}
+
+.essay-textarea:focus {
+  outline: none;
+  border-color: var(--accent-grade);
+}
+
+.essay-textarea:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.essay-actions {
+  display: flex;
+  gap: 0.75rem;
+}
+
+.btn {
+  padding: 0.6rem 1.4rem;
+  border: none;
+  border-radius: 8px;
+  font-family: inherit;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: opacity 0.2s, transform 0.1s;
+}
+
+.btn:hover:not(:disabled) {
+  opacity: 0.88;
+}
+
+.btn:active:not(:disabled) {
+  transform: scale(0.98);
+}
+
+.btn:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, var(--accent-grade), var(--accent-review));
+  color: #fff;
+}
+
+.btn-secondary {
+  background: var(--surface-2);
+  color: var(--text-muted);
+  border: 1px solid var(--border);
+}
+
+/* ── Results Panels ─────────────────────────────── */
+.panels {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+}
+
+@media (max-width: 860px) {
+  .panels {
+    grid-template-columns: 1fr;
+  }
+}
+
+.panel {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.grading-panel {
+  border-top: 3px solid var(--accent-grade);
+}
+
+.review-panel {
+  border-top: 3px solid var(--accent-review);
+}
+
+.panel-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.panel-title {
+  font-size: 1.2rem;
+  font-weight: 700;
+}
+
+.panel-placeholder {
+  color: var(--text-muted);
+  font-style: italic;
+}
+
+/* ── Status Badge ───────────────────────────────── */
+.status-badge {
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 0.25rem 0.65rem;
+  border-radius: 99px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.status-idle { background: var(--surface-2); color: var(--text-muted); }
+.status-streaming { background: #1a3a5c; color: #63b3ed; animation: pulse 1.5s infinite; }
+.status-done { background: #1a3a2a; color: #68d391; }
+.status-error { background: #3a1a1a; color: var(--error); }
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.65; }
+}
+
+/* ── Section Blocks ─────────────────────────────── */
+.sections {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.section-block {
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 1rem;
+}
+
+.section-block.section-active {
+  border-color: var(--accent-grade);
+}
+
+.review-panel .section-block.section-active {
+  border-color: var(--accent-review);
+}
+
+.section-heading {
+  font-size: 0.85rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-muted);
+  margin-bottom: 0.6rem;
+}
+
+.section-content {
+  font-size: 0.93rem;
+  line-height: 1.75;
+  color: var(--text);
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+.refined-essay {
+  font-family: inherit;
+  font-size: 0.9rem;
+  background: transparent;
+  border: none;
+  padding: 0;
+}
+
+/* ── Cursor ─────────────────────────────────────── */
+.cursor-blink {
+  display: inline-block;
+  font-weight: 100;
+  animation: blink 0.7s step-end infinite;
+  margin-left: 1px;
+  color: var(--accent-grade);
+}
+
+.review-panel .cursor-blink {
+  color: var(--accent-review);
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+/* ── Score Card ─────────────────────────────────── */
+.score-card {
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 1rem 1.25rem;
+}
+
+.score-card-title {
+  font-size: 0.85rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-muted);
+  margin-bottom: 0.75rem;
+}
+
+.score-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+}
+
+.score-item {
+  display: grid;
+  grid-template-columns: 90px 1fr 56px;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.score-label {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+.score-bar-wrap {
+  background: var(--border);
+  border-radius: 99px;
+  height: 7px;
+  overflow: hidden;
+}
+
+.score-bar {
+  height: 100%;
+  background: linear-gradient(90deg, var(--accent-grade), var(--accent-review));
+  border-radius: 99px;
+  transition: width 0.4s ease;
+}
+
+.score-value {
+  font-size: 0.85rem;
+  color: var(--text);
+  text-align: right;
+}
+
+.score-total {
+  margin-top: 0.75rem;
+  font-size: 0.95rem;
+  color: var(--text);
+  text-align: right;
+}
+
+/* ── Error ──────────────────────────────────────── */
+.error-box {
+  background: #3a1a1a;
+  border: 1px solid var(--error);
+  border-radius: 8px;
+  padding: 0.75rem 1rem;
+  color: var(--error);
+  font-size: 0.9rem;
+}
