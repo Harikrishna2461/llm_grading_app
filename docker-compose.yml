@@ -1,10 +1,14 @@
-
-
 networks:
   essay-net:
     driver: bridge
 
 services:
+  ollama:
+    image: ollama/ollama
+    ports:
+      - "11434:11434"
+    networks:
+      - essay-net
   grading-agent:
     build: ./grading-agent
     env_file: .env
